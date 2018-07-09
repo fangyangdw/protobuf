@@ -52,6 +52,7 @@ NSString *const GPBCodedInputStreamErrorDomain =
 //  int CodedInputStream::default_recursion_limit_ = 100;
 static const NSUInteger kDefaultRecursionLimit = 100;
 
+extern void(^pbexceptionHandler)(NSException*);
 static void RaiseException(NSInteger code, NSString *reason) {
   NSDictionary *errorInfo = nil;
   if ([reason length]) {
@@ -63,9 +64,12 @@ static void RaiseException(NSInteger code, NSString *reason) {
 
   NSDictionary *exceptionInfo =
       @{ GPBCodedInputStreamUnderlyingErrorKey: error };
-  [[[NSException alloc] initWithName:GPBCodedInputStreamException
-                              reason:reason
-                            userInfo:exceptionInfo] raise];
+    pbexceptionHandler([[NSException alloc] initWithName:GPBCodedInputStreamException
+                                                  reason:reason
+                                                userInfo:exceptionInfo]);
+//  [[[NSException alloc] initWithName:GPBCodedInputStreamException
+//                              reason:reason
+//                            userInfo:exceptionInfo] raise];
 }
 
 static void CheckSize(GPBCodedInputStreamState *state, size_t size) {

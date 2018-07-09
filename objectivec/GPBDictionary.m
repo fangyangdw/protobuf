@@ -3339,11 +3339,13 @@ void GPBDictionaryReadEntry(id mapDictionary,
   [_dictionary removeAllObjects];
 }
 
+extern void(^pbexceptionHandler)(NSException*);
 - (void)setEnum:(int32_t)value forKey:(uint32_t)key {
   if (!_validationFunc(value)) {
-    [NSException raise:NSInvalidArgumentException
-                format:@"GPBUInt32EnumDictionary: Attempt to set an unknown enum value (%d)",
-                       value];
+      pbexceptionHandler([NSException exceptionWithName:NSInvalidArgumentException reason:[NSString stringWithFormat:@"GPBUInt32EnumDictionary: Attempt to set an unknown enum value (%d)",value] userInfo:nil]);
+//    [NSException raise:NSInvalidArgumentException
+//                format:@"GPBUInt32EnumDictionary: Attempt to set an unknown enum value (%d)",
+//                       value];
   }
 
   [_dictionary setObject:@(value) forKey:@(key)];
@@ -3407,8 +3409,9 @@ void GPBDictionaryReadEntry(id mapDictionary,
     if (count && objects && keys) {
       for (NSUInteger i = 0; i < count; ++i) {
         if (!objects[i]) {
-          [NSException raise:NSInvalidArgumentException
-                      format:@"Attempting to add nil object to a Dictionary"];
+            pbexceptionHandler([NSException exceptionWithName:NSInvalidArgumentException reason:@"Attempting to add nil object to a Dictionary" userInfo:nil]);
+//          [NSException raise:NSInvalidArgumentException
+//                      format:@"Attempting to add nil object to a Dictionary"];
         }
         [_dictionary setObject:objects[i] forKey:@(keys[i])];
       }
@@ -3580,8 +3583,9 @@ void GPBDictionaryReadEntry(id mapDictionary,
 
 - (void)setObject:(id)object forKey:(uint32_t)key {
   if (!object) {
-    [NSException raise:NSInvalidArgumentException
-                format:@"Attempting to add nil object to a Dictionary"];
+      pbexceptionHandler([NSException exceptionWithName:NSInvalidArgumentException reason:@"Attempting to add nil object to a Dictionary" userInfo:nil]);
+//    [NSException raise:NSInvalidArgumentException
+//                format:@"Attempting to add nil object to a Dictionary"];
   }
   [_dictionary setObject:object forKey:@(key)];
   if (_autocreator) {
@@ -5401,9 +5405,10 @@ void GPBDictionaryReadEntry(id mapDictionary,
 
 - (void)setEnum:(int32_t)value forKey:(int32_t)key {
   if (!_validationFunc(value)) {
-    [NSException raise:NSInvalidArgumentException
-                format:@"GPBInt32EnumDictionary: Attempt to set an unknown enum value (%d)",
-                       value];
+      pbexceptionHandler([NSException exceptionWithName:NSInvalidArgumentException reason:[NSString stringWithFormat:@"GPBInt32EnumDictionary: Attempt to set an unknown enum value (%d)",value] userInfo:nil]);
+//    [NSException raise:NSInvalidArgumentException
+//                format:@"GPBInt32EnumDictionary: Attempt to set an unknown enum value (%d)",
+//                       value];
   }
 
   [_dictionary setObject:@(value) forKey:@(key)];
@@ -5467,8 +5472,9 @@ void GPBDictionaryReadEntry(id mapDictionary,
     if (count && objects && keys) {
       for (NSUInteger i = 0; i < count; ++i) {
         if (!objects[i]) {
-          [NSException raise:NSInvalidArgumentException
-                      format:@"Attempting to add nil object to a Dictionary"];
+            pbexceptionHandler([NSException exceptionWithName:NSInvalidArgumentException reason:@"Attempting to add nil object to a Dictionary" userInfo:nil]);
+//          [NSException raise:NSInvalidArgumentException
+//                      format:@"Attempting to add nil object to a Dictionary"];
         }
         [_dictionary setObject:objects[i] forKey:@(keys[i])];
       }
@@ -5640,8 +5646,9 @@ void GPBDictionaryReadEntry(id mapDictionary,
 
 - (void)setObject:(id)object forKey:(int32_t)key {
   if (!object) {
-    [NSException raise:NSInvalidArgumentException
-                format:@"Attempting to add nil object to a Dictionary"];
+      pbexceptionHandler([NSException exceptionWithName:NSInvalidArgumentException reason:@"Attempting to add nil object to a Dictionary" userInfo:nil]);
+//    [NSException raise:NSInvalidArgumentException
+//                format:@"Attempting to add nil object to a Dictionary"];
   }
   [_dictionary setObject:object forKey:@(key)];
   if (_autocreator) {
@@ -7461,9 +7468,10 @@ void GPBDictionaryReadEntry(id mapDictionary,
 
 - (void)setEnum:(int32_t)value forKey:(uint64_t)key {
   if (!_validationFunc(value)) {
-    [NSException raise:NSInvalidArgumentException
-                format:@"GPBUInt64EnumDictionary: Attempt to set an unknown enum value (%d)",
-                       value];
+      pbexceptionHandler([NSException exceptionWithName:NSInvalidArgumentException reason:[NSString stringWithFormat:@"GPBUInt64EnumDictionary: Attempt to set an unknown enum value (%d)",value] userInfo:nil]);
+//    [NSException raise:NSInvalidArgumentException
+//                format:@"GPBUInt64EnumDictionary: Attempt to set an unknown enum value (%d)",
+//                       value];
   }
 
   [_dictionary setObject:@(value) forKey:@(key)];
@@ -7527,8 +7535,9 @@ void GPBDictionaryReadEntry(id mapDictionary,
     if (count && objects && keys) {
       for (NSUInteger i = 0; i < count; ++i) {
         if (!objects[i]) {
-          [NSException raise:NSInvalidArgumentException
-                      format:@"Attempting to add nil object to a Dictionary"];
+            pbexceptionHandler([NSException exceptionWithName:NSInvalidArgumentException reason:@"Attempting to add nil object to a Dictionary" userInfo:nil]);
+//          [NSException raise:NSInvalidArgumentException
+//                      format:@"Attempting to add nil object to a Dictionary"];
         }
         [_dictionary setObject:objects[i] forKey:@(keys[i])];
       }
@@ -7700,8 +7709,9 @@ void GPBDictionaryReadEntry(id mapDictionary,
 
 - (void)setObject:(id)object forKey:(uint64_t)key {
   if (!object) {
-    [NSException raise:NSInvalidArgumentException
-                format:@"Attempting to add nil object to a Dictionary"];
+      pbexceptionHandler([NSException exceptionWithName:NSInvalidArgumentException reason:@"Attempting to add nil object to a Dictionary" userInfo:nil]);
+//    [NSException raise:NSInvalidArgumentException
+//                format:@"Attempting to add nil object to a Dictionary"];
   }
   [_dictionary setObject:object forKey:@(key)];
   if (_autocreator) {
@@ -9521,9 +9531,10 @@ void GPBDictionaryReadEntry(id mapDictionary,
 
 - (void)setEnum:(int32_t)value forKey:(int64_t)key {
   if (!_validationFunc(value)) {
-    [NSException raise:NSInvalidArgumentException
-                format:@"GPBInt64EnumDictionary: Attempt to set an unknown enum value (%d)",
-                       value];
+      pbexceptionHandler([NSException exceptionWithName:NSInvalidArgumentException reason:[NSString stringWithFormat:@"GPBInt64EnumDictionary: Attempt to set an unknown enum value (%d)",value] userInfo:nil]);
+//    [NSException raise:NSInvalidArgumentException
+//                format:@"GPBInt64EnumDictionary: Attempt to set an unknown enum value (%d)",
+//                       value];
   }
 
   [_dictionary setObject:@(value) forKey:@(key)];
@@ -9587,8 +9598,9 @@ void GPBDictionaryReadEntry(id mapDictionary,
     if (count && objects && keys) {
       for (NSUInteger i = 0; i < count; ++i) {
         if (!objects[i]) {
-          [NSException raise:NSInvalidArgumentException
-                      format:@"Attempting to add nil object to a Dictionary"];
+            pbexceptionHandler([NSException exceptionWithName:NSInvalidArgumentException reason:@"Attempting to add nil object to a Dictionary" userInfo:nil]);
+//          [NSException raise:NSInvalidArgumentException
+//                      format:@"Attempting to add nil object to a Dictionary"];
         }
         [_dictionary setObject:objects[i] forKey:@(keys[i])];
       }
@@ -9760,8 +9772,9 @@ void GPBDictionaryReadEntry(id mapDictionary,
 
 - (void)setObject:(id)object forKey:(int64_t)key {
   if (!object) {
-    [NSException raise:NSInvalidArgumentException
-                format:@"Attempting to add nil object to a Dictionary"];
+      pbexceptionHandler([NSException exceptionWithName:NSInvalidArgumentException reason:@"Attempting to add nil object to a Dictionary" userInfo:nil]);
+//    [NSException raise:NSInvalidArgumentException
+//                format:@"Attempting to add nil object to a Dictionary"];
   }
   [_dictionary setObject:object forKey:@(key)];
   if (_autocreator) {
@@ -9835,8 +9848,9 @@ void GPBDictionaryReadEntry(id mapDictionary,
     if (count && values && keys) {
       for (NSUInteger i = 0; i < count; ++i) {
         if (!keys[i]) {
-          [NSException raise:NSInvalidArgumentException
-                      format:@"Attempting to add nil key to a Dictionary"];
+            pbexceptionHandler([NSException exceptionWithName:NSInvalidArgumentException reason:@"Attempting to add nil key to a Dictionary" userInfo:nil]);
+//          [NSException raise:NSInvalidArgumentException
+//                      format:@"Attempting to add nil key to a Dictionary"];
         }
         [_dictionary setObject:@(values[i]) forKey:keys[i]];
       }
@@ -9987,8 +10001,9 @@ void GPBDictionaryReadEntry(id mapDictionary,
 
 - (void)setUInt32:(uint32_t)value forKey:(NSString *)key {
   if (!key) {
-    [NSException raise:NSInvalidArgumentException
-                format:@"Attempting to add nil key to a Dictionary"];
+      pbexceptionHandler([NSException exceptionWithName:NSInvalidArgumentException reason:@"Attempting to add nil key to a Dictionary" userInfo:nil]);
+//    [NSException raise:NSInvalidArgumentException
+//                format:@"Attempting to add nil key to a Dictionary"];
   }
   [_dictionary setObject:@(value) forKey:key];
   if (_autocreator) {
@@ -10059,8 +10074,9 @@ void GPBDictionaryReadEntry(id mapDictionary,
     if (count && values && keys) {
       for (NSUInteger i = 0; i < count; ++i) {
         if (!keys[i]) {
-          [NSException raise:NSInvalidArgumentException
-                      format:@"Attempting to add nil key to a Dictionary"];
+            pbexceptionHandler([NSException exceptionWithName:NSInvalidArgumentException reason:@"Attempting to add nil key to a Dictionary" userInfo:nil]);
+//          [NSException raise:NSInvalidArgumentException
+//                      format:@"Attempting to add nil key to a Dictionary"];
         }
         [_dictionary setObject:@(values[i]) forKey:keys[i]];
       }
@@ -10211,8 +10227,9 @@ void GPBDictionaryReadEntry(id mapDictionary,
 
 - (void)setInt32:(int32_t)value forKey:(NSString *)key {
   if (!key) {
-    [NSException raise:NSInvalidArgumentException
-                format:@"Attempting to add nil key to a Dictionary"];
+      pbexceptionHandler([NSException exceptionWithName:NSInvalidArgumentException reason:@"Attempting to add nil key to a Dictionary" userInfo:nil]);
+//    [NSException raise:NSInvalidArgumentException
+//                format:@"Attempting to add nil key to a Dictionary"];
   }
   [_dictionary setObject:@(value) forKey:key];
   if (_autocreator) {
@@ -10283,8 +10300,9 @@ void GPBDictionaryReadEntry(id mapDictionary,
     if (count && values && keys) {
       for (NSUInteger i = 0; i < count; ++i) {
         if (!keys[i]) {
-          [NSException raise:NSInvalidArgumentException
-                      format:@"Attempting to add nil key to a Dictionary"];
+            pbexceptionHandler([NSException exceptionWithName:NSInvalidArgumentException reason:@"Attempting to add nil key to a Dictionary" userInfo:nil]);
+//          [NSException raise:NSInvalidArgumentException
+//                      format:@"Attempting to add nil key to a Dictionary"];
         }
         [_dictionary setObject:@(values[i]) forKey:keys[i]];
       }
@@ -10435,8 +10453,9 @@ void GPBDictionaryReadEntry(id mapDictionary,
 
 - (void)setUInt64:(uint64_t)value forKey:(NSString *)key {
   if (!key) {
-    [NSException raise:NSInvalidArgumentException
-                format:@"Attempting to add nil key to a Dictionary"];
+      pbexceptionHandler([NSException exceptionWithName:NSInvalidArgumentException reason:@"Attempting to add nil key to a Dictionary" userInfo:nil]);
+//    [NSException raise:NSInvalidArgumentException
+//                format:@"Attempting to add nil key to a Dictionary"];
   }
   [_dictionary setObject:@(value) forKey:key];
   if (_autocreator) {
@@ -10507,8 +10526,9 @@ void GPBDictionaryReadEntry(id mapDictionary,
     if (count && values && keys) {
       for (NSUInteger i = 0; i < count; ++i) {
         if (!keys[i]) {
-          [NSException raise:NSInvalidArgumentException
-                      format:@"Attempting to add nil key to a Dictionary"];
+            pbexceptionHandler([NSException exceptionWithName:NSInvalidArgumentException reason:@"Attempting to add nil key to a Dictionary" userInfo:nil]);
+//          [NSException raise:NSInvalidArgumentException
+//                      format:@"Attempting to add nil key to a Dictionary"];
         }
         [_dictionary setObject:@(values[i]) forKey:keys[i]];
       }
@@ -10659,8 +10679,9 @@ void GPBDictionaryReadEntry(id mapDictionary,
 
 - (void)setInt64:(int64_t)value forKey:(NSString *)key {
   if (!key) {
-    [NSException raise:NSInvalidArgumentException
-                format:@"Attempting to add nil key to a Dictionary"];
+      pbexceptionHandler([NSException exceptionWithName:NSInvalidArgumentException reason:@"Attempting to add nil key to a Dictionary" userInfo:nil]);
+//    [NSException raise:NSInvalidArgumentException
+//                format:@"Attempting to add nil key to a Dictionary"];
   }
   [_dictionary setObject:@(value) forKey:key];
   if (_autocreator) {
@@ -10731,8 +10752,9 @@ void GPBDictionaryReadEntry(id mapDictionary,
     if (count && values && keys) {
       for (NSUInteger i = 0; i < count; ++i) {
         if (!keys[i]) {
-          [NSException raise:NSInvalidArgumentException
-                      format:@"Attempting to add nil key to a Dictionary"];
+            pbexceptionHandler([NSException exceptionWithName:NSInvalidArgumentException reason:@"Attempting to add nil key to a Dictionary" userInfo:nil]);
+//          [NSException raise:NSInvalidArgumentException
+//                      format:@"Attempting to add nil key to a Dictionary"];
         }
         [_dictionary setObject:@(values[i]) forKey:keys[i]];
       }
@@ -10883,8 +10905,9 @@ void GPBDictionaryReadEntry(id mapDictionary,
 
 - (void)setBool:(BOOL)value forKey:(NSString *)key {
   if (!key) {
-    [NSException raise:NSInvalidArgumentException
-                format:@"Attempting to add nil key to a Dictionary"];
+      pbexceptionHandler([NSException exceptionWithName:NSInvalidArgumentException reason:@"Attempting to add nil key to a Dictionary" userInfo:nil]);
+//    [NSException raise:NSInvalidArgumentException
+//                format:@"Attempting to add nil key to a Dictionary"];
   }
   [_dictionary setObject:@(value) forKey:key];
   if (_autocreator) {
@@ -10955,8 +10978,9 @@ void GPBDictionaryReadEntry(id mapDictionary,
     if (count && values && keys) {
       for (NSUInteger i = 0; i < count; ++i) {
         if (!keys[i]) {
-          [NSException raise:NSInvalidArgumentException
-                      format:@"Attempting to add nil key to a Dictionary"];
+            pbexceptionHandler([NSException exceptionWithName:NSInvalidArgumentException reason:@"Attempting to add nil key to a Dictionary" userInfo:nil]);
+//          [NSException raise:NSInvalidArgumentException
+//                      format:@"Attempting to add nil key to a Dictionary"];
         }
         [_dictionary setObject:@(values[i]) forKey:keys[i]];
       }
@@ -11107,8 +11131,9 @@ void GPBDictionaryReadEntry(id mapDictionary,
 
 - (void)setFloat:(float)value forKey:(NSString *)key {
   if (!key) {
-    [NSException raise:NSInvalidArgumentException
-                format:@"Attempting to add nil key to a Dictionary"];
+      pbexceptionHandler([NSException exceptionWithName:NSInvalidArgumentException reason:@"Attempting to add nil key to a Dictionary" userInfo:nil]);
+//    [NSException raise:NSInvalidArgumentException
+//                format:@"Attempting to add nil key to a Dictionary"];
   }
   [_dictionary setObject:@(value) forKey:key];
   if (_autocreator) {
@@ -11179,8 +11204,9 @@ void GPBDictionaryReadEntry(id mapDictionary,
     if (count && values && keys) {
       for (NSUInteger i = 0; i < count; ++i) {
         if (!keys[i]) {
-          [NSException raise:NSInvalidArgumentException
-                      format:@"Attempting to add nil key to a Dictionary"];
+            pbexceptionHandler([NSException exceptionWithName:NSInvalidArgumentException reason:@"Attempting to add nil key to a Dictionary" userInfo:nil]);
+//          [NSException raise:NSInvalidArgumentException
+//                      format:@"Attempting to add nil key to a Dictionary"];
         }
         [_dictionary setObject:@(values[i]) forKey:keys[i]];
       }
@@ -11331,8 +11357,9 @@ void GPBDictionaryReadEntry(id mapDictionary,
 
 - (void)setDouble:(double)value forKey:(NSString *)key {
   if (!key) {
-    [NSException raise:NSInvalidArgumentException
-                format:@"Attempting to add nil key to a Dictionary"];
+      pbexceptionHandler([NSException exceptionWithName:NSInvalidArgumentException reason:@"Attempting to add nil key to a Dictionary" userInfo:nil]);
+//    [NSException raise:NSInvalidArgumentException
+//                format:@"Attempting to add nil key to a Dictionary"];
   }
   [_dictionary setObject:@(value) forKey:key];
   if (_autocreator) {
@@ -11427,8 +11454,9 @@ void GPBDictionaryReadEntry(id mapDictionary,
     if (count && rawValues && keys) {
       for (NSUInteger i = 0; i < count; ++i) {
         if (!keys[i]) {
-          [NSException raise:NSInvalidArgumentException
-                      format:@"Attempting to add nil key to a Dictionary"];
+            pbexceptionHandler([NSException exceptionWithName:NSInvalidArgumentException reason:@"Attempting to add nil key to a Dictionary" userInfo:nil]);
+//          [NSException raise:NSInvalidArgumentException
+//                      format:@"Attempting to add nil key to a Dictionary"];
         }
         [_dictionary setObject:@(rawValues[i]) forKey:keys[i]];
       }
@@ -11626,8 +11654,9 @@ void GPBDictionaryReadEntry(id mapDictionary,
 
 - (void)setRawValue:(int32_t)value forKey:(NSString *)key {
   if (!key) {
-    [NSException raise:NSInvalidArgumentException
-                format:@"Attempting to add nil key to a Dictionary"];
+      pbexceptionHandler([NSException exceptionWithName:NSInvalidArgumentException reason:@"Attempting to add nil key to a Dictionary" userInfo:nil]);
+//    [NSException raise:NSInvalidArgumentException
+//                format:@"Attempting to add nil key to a Dictionary"];
   }
   [_dictionary setObject:@(value) forKey:key];
   if (_autocreator) {
@@ -11645,13 +11674,15 @@ void GPBDictionaryReadEntry(id mapDictionary,
 
 - (void)setEnum:(int32_t)value forKey:(NSString *)key {
   if (!key) {
-    [NSException raise:NSInvalidArgumentException
-                format:@"Attempting to add nil key to a Dictionary"];
+      pbexceptionHandler([NSException exceptionWithName:NSInvalidArgumentException reason:@"Attempting to add nil key to a Dictionary" userInfo:nil]);
+//    [NSException raise:NSInvalidArgumentException
+//                format:@"Attempting to add nil key to a Dictionary"];
   }
   if (!_validationFunc(value)) {
-    [NSException raise:NSInvalidArgumentException
-                format:@"GPBStringEnumDictionary: Attempt to set an unknown enum value (%d)",
-                       value];
+      pbexceptionHandler([NSException exceptionWithName:NSInvalidArgumentException reason:[NSString stringWithFormat:@"GPBStringEnumDictionary: Attempt to set an unknown enum value (%d)",value] userInfo:nil]);
+//    [NSException raise:NSInvalidArgumentException
+//                format:@"GPBStringEnumDictionary: Attempt to set an unknown enum value (%d)",
+//                       value];
   }
 
   [_dictionary setObject:@(value) forKey:key];
@@ -13413,8 +13444,9 @@ void GPBDictionaryReadEntry(id mapDictionary,
   if (self) {
     for (NSUInteger i = 0; i < count; ++i) {
       if (!objects[i]) {
-        [NSException raise:NSInvalidArgumentException
-                    format:@"Attempting to add nil object to a Dictionary"];
+          pbexceptionHandler([NSException exceptionWithName:NSInvalidArgumentException reason:@"Attempting to add nil object to a Dictionary" userInfo:nil]);
+//        [NSException raise:NSInvalidArgumentException
+//                    format:@"Attempting to add nil object to a Dictionary"];
       }
       int idx = keys[i] ? 1 : 0;
       [_values[idx] release];
@@ -13596,8 +13628,9 @@ void GPBDictionaryReadEntry(id mapDictionary,
 
 - (void)setObject:(id)object forKey:(BOOL)key {
   if (!object) {
-    [NSException raise:NSInvalidArgumentException
-                format:@"Attempting to add nil object to a Dictionary"];
+      pbexceptionHandler([NSException exceptionWithName:NSInvalidArgumentException reason:@"Attempting to add nil object to a Dictionary" userInfo:nil]);
+//    [NSException raise:NSInvalidArgumentException
+//                format:@"Attempting to add nil object to a Dictionary"];
   }
   int idx = (key ? 1 : 0);
   [_values[idx] release];
@@ -13927,9 +13960,10 @@ void GPBDictionaryReadEntry(id mapDictionary,
 
 - (void)setEnum:(int32_t)value forKey:(BOOL)key {
   if (!_validationFunc(value)) {
-    [NSException raise:NSInvalidArgumentException
-                format:@"GPBBoolEnumDictionary: Attempt to set an unknown enum value (%d)",
-     value];
+      pbexceptionHandler([NSException exceptionWithName:NSInvalidArgumentException reason:[NSString stringWithFormat:@"GPBBoolEnumDictionary: Attempt to set an unknown enum value (%d)",value] userInfo:nil]);
+//    [NSException raise:NSInvalidArgumentException
+//                format:@"GPBBoolEnumDictionary: Attempt to set an unknown enum value (%d)",
+//     value];
   }
   int idx = (key ? 1 : 0);
   _values[idx] = value;

@@ -36,12 +36,15 @@
 #import "GPBUtilities.h"
 #import "GPBWireFormat.h"
 
+extern void(^pbexceptionHandler)(NSException*);
+
 #pragma mark Helpers
 
 static void checkNumber(int32_t number) {
   if (number == 0) {
-    [NSException raise:NSInvalidArgumentException
-                format:@"Zero is not a valid field number."];
+      pbexceptionHandler([NSException exceptionWithName:NSInvalidArgumentException reason:@"Zero is not a valid field number." userInfo:nil]);
+//    [NSException raise:NSInvalidArgumentException
+//                format:@"Zero is not a valid field number."];
   }
 }
 

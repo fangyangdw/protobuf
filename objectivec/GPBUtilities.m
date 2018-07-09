@@ -191,6 +191,8 @@ void GPBMessageDropUnknownFieldsRecursively(GPBMessage *initialMessage) {
 //    generated code's .o was made. This checks that at runtime the generated
 //    code and runtime library match.
 
+extern void(^pbexceptionHandler)(NSException*);
+
 void GPBCheckRuntimeVersionSupport(int32_t objcRuntimeVersion) {
   // NOTE: This is passing the value captured in the compiled code to check
   // against the values captured when the runtime support was compiled. This
@@ -640,9 +642,10 @@ void GPBSetEnumIvarWithFieldInternal(GPBMessage *self,
                                      GPBFileSyntax syntax) {
   // Don't allow in unknown values.  Proto3 can use the Raw method.
   if (![field isValidEnumValue:value]) {
-    [NSException raise:NSInvalidArgumentException
-                format:@"%@.%@: Attempt to set an unknown enum value (%d)",
-                       [self class], field.name, value];
+      pbexceptionHandler([NSException exceptionWithName:NSInvalidArgumentException reason:[NSString stringWithFormat:@"%@.%@: Attempt to set an unknown enum value (%d)",[self class], field.name, value] userInfo:nil]);
+//    [NSException raise:NSInvalidArgumentException
+//                format:@"%@.%@: Attempt to set an unknown enum value (%d)",
+//                       [self class], field.name, value];
   }
   GPBSetInt32IvarWithFieldInternal(self, field, value, syntax);
 }
